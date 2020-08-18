@@ -1,0 +1,11 @@
+{
+  "name": "tbdf",
+  "version": "1.0.0",
+  "description": "Trial build of the project for the code for good hackathon",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Suhas R N",
+  "license": "ISC"
+}
