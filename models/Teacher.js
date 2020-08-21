@@ -19,7 +19,8 @@ const teacherSchema = Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        trim: true,
     },
     encry_password: {
         type: String,
@@ -30,25 +31,24 @@ const teacherSchema = Schema({
         type: Number,
         required: true,
         unique: true,
-    },
-    institute: {
-        type: String,
-        required: true
     }
 });
-
+// noinspection JSUnresolvedVariable
 teacherSchema.virtual("password")
     .set(function(password) {
         this._password = password;
         this.salt = uuidv4();
+        // noinspection JSUnresolvedVariable
         this.encry_password = this.securePassword(this._password);
     })
     .get(function() {
+        // noinspection JSUnresolvedVariable
         return this._password;
     });
 
 teacherSchema.method = {
     authenticate: function(plainPassword) {
+        // noinspection JSUnresolvedVariable
         return this.securePassword(plainPassword) === this.encry_password;
     },
     securePassword: function(plainPassword) {
