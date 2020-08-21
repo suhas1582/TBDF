@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const Schema = new mongoose.Schema;
 
-const teacherSchema = Schema({
+const userSchema = Schema({
     first_name: {
         type: String,
         maxLength: 32,
@@ -31,10 +31,15 @@ const teacherSchema = Schema({
         type: Number,
         required: true,
         unique: true,
-    }
+    },
+    role: {
+        type: String,
+        default: "Teacher",
+        required: true
+    },
 });
 // noinspection JSUnresolvedVariable
-teacherSchema.virtual("password")
+userSchema.virtual("password")
     .set(function(password) {
         this._password = password;
         this.salt = uuidv4();
@@ -46,7 +51,7 @@ teacherSchema.virtual("password")
         return this._password;
     });
 
-teacherSchema.method = {
+userSchema.method = {
     authenticate: function(plainPassword) {
         // noinspection JSUnresolvedVariable
         return this.securePassword(plainPassword) === this.encry_password;
@@ -64,4 +69,4 @@ teacherSchema.method = {
     }
 }
 
-module.exports = mongoose.model("Teacher", teacherSchema);
+module.exports = mongoose.model("User", userSchema);

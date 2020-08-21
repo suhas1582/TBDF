@@ -22,7 +22,7 @@ const classSchema = new mongoose.Schema({
     },
     teacher: {
         type: ObjectId,
-        ref: "Teacher",
+        ref: "User",
         required: true
     },
     institute: {
