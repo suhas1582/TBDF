@@ -32,6 +32,10 @@ const userSchema = Schema({
         required: true,
         unique: true,
     },
+    classes: {
+        type: Array,
+        default: [],
+    },
     role: {
         type: String,
         default: "Teacher",

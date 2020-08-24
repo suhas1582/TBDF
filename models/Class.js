@@ -20,11 +20,6 @@ const classSchema = new mongoose.Schema({
         trim: true,
         unique: true
     },
-    teacher: {
-        type: ObjectId,
-        ref: "User",
-        required: true
-    },
     institute: {
         type: String,
         required: true,
@@ -48,7 +43,7 @@ classSchema.virtual("classId")
                 }
             })
             // noinspection JSUnresolvedVariable
-            this.classId = `${abbvr}${this.standard.toString()}${this.section.toUpperCase()}${this.subject.substring(0,2).toUpperCase()}`;
+            this._classId = `${abbvr}${this.standard.toString()}${this.section.toUpperCase()}${this.subject.substring(0,2).toUpperCase()}`;
         } else {
             // noinspection JSUnresolvedVariable
             this._classId = this.courseCode;
