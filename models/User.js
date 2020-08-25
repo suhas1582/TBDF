@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
 const crypto = require('crypto');
 
-const Schema = new mongoose.Schema;
+const Schema = mongoose.Schema;
 
-const userSchema = Schema({
+const userSchema = new Schema({
     first_name: {
         type: String,
         maxLength: 32,

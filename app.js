@@ -3,8 +3,12 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const authRoutes = require('./routes/auth');
+
 const app = new express();
 const port = 3000;
+
+
 
 mongoose.connect('mongodb://127.0.0.1:27017/intershalaguru', {
     useNewUrlParser: true,
@@ -16,6 +20,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/intershalaguru', {
 
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use("/api/auth", authRoutes);
 
 
 app.get("/", (req, res, next) => {
