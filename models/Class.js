@@ -18,7 +18,8 @@ const classSchema = new mongoose.Schema({
     courseCode: {
         type: String,
         trim: true,
-        unique: true
+        unique: true,
+        required: true
     },
     institute: {
         type: String,
@@ -27,31 +28,32 @@ const classSchema = new mongoose.Schema({
     }
 });
 
-classSchema.virtual("classId")
-    .set(function() {
-        this._classId = "";
-        // noinspection JSUnresolvedVariable
-        if(!this.courseCode) {
-            // noinspection JSUnresolvedVariable
-            let instituteNameList = this.institute.split(' ');
-            let abbvr = "";
-            instituteNameList.forEach((name) => {
-                if(name === "of" || "in" || "at" ) {
-                    abbvr += "";
-                } else {
-                    abbvr += name.charAt(0).toUpperCase();
-                }
-            })
-            // noinspection JSUnresolvedVariable
-            this._classId = `${abbvr}${this.standard.toString()}${this.section.toUpperCase()}${this.subject.substring(0,2).toUpperCase()}`;
-        } else {
-            // noinspection JSUnresolvedVariable
-            this._classId = this.courseCode;
-        }
-    })
-    .get(function() {
-        // noinspection JSUnresolvedVariable
-        return this._classId;
-    });
+// classSchema.virtual("classId")
+//     .set(function() {
+//         this._classId = "";
+//         // noinspection JSUnresolvedVariable
+//         if(!this.courseCode) {
+//             // noinspection JSUnresolvedVariable
+//             let instituteNameList = this.institute.split(' ');
+//             let abbvr = "";
+//             instituteNameList.forEach((name) => {
+//                 name = name.toLowerCase();
+//                 if(name === "of" || name === "in" || name === "at" || name === "the") {
+//                     abbvr += "";
+//                 } else {
+//                     abbvr += name.charAt(0).toUpperCase();
+//                 }
+//             })
+//             // noinspection JSUnresolvedVariable
+//             this._classId = `${abbvr}${this.standard.toString()}${this.section.toUpperCase()}${this.subject.substring(0,2).toUpperCase()}`;
+//         } else {
+//             // noinspection JSUnresolvedVariable
+//             this._classId = this.courseCode;
+//         }
+//     })
+//     .get(function() {
+//         // noinspection JSUnresolvedVariable
+//         return this._classId;
+//     });
 
 module.exports = mongoose.model("Class", classSchema);

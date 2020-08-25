@@ -55,7 +55,7 @@ userSchema.virtual("password")
         return this._password;
     });
 
-userSchema.method = {
+userSchema.methods = {
     authenticate: function(plainPassword) {
         // noinspection JSUnresolvedVariable
         return this.securePassword(plainPassword) === this.encry_password;
